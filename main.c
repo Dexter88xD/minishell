@@ -3,22 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sohamdan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:53:26 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/23 10:53:27 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:32:40 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 int	main(void)
 {
-	char	*argv[2];
+	char	*input;
 
-	argv[0] = "/bin/ls";
-	argv[1] = NULL;
-	execve(argv[0], argv, 0);
-	printf("toz\n");
+	while (1)
+	{
+		input = readline("minishell$ ");
+		add_history(input);
+		free(input);
+	}
 }

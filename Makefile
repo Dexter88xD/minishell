@@ -117,7 +117,7 @@ all: $(NAME)
 
 # Link executable with libft
 $(NAME): $(OBJECTS) $(LIBFT)/libft.a
-	@$(CC) -o $(NAME) $(OBJECTS) $(LIB_FLAGS)
+	@$(CC) -o $(NAME) $(OBJECTS) $(LIB_FLAGS) -lreadline -lncurses
 	@echo "$(BOLD_GREEN)Executable ready!$(RESET)"
 
 # Compile .c to .o
