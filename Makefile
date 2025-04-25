@@ -30,7 +30,7 @@ RESET        = \\033[0m
 # ──────────────────────────────────────────────────────────────────────────────
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I $(LIBFT) -I.
+CFLAGS		= -Wall -Wextra -Werror -I $(LIBFT) -I $(INC_DIR)
 LIB_FLAGS	= -L$(LIBFT) -lft
 RM			= rm -rf
 

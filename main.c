@@ -6,60 +6,82 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:53:26 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/25 10:18:56 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/04/25 11:59:30 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <readline/history.h>
-#include <sys/wait.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
-#include <signal.h>
-#include "libft.h"
+#include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
+#include "minishell.h"
 
-		// ------------------------------- Parsing Plan -------------------------------
-		// [1] Tokenisation:
-			// Split the input string by spaces while respecting quotes.
-			// Store the resulting tokens in a linked list.
+// Found issue with this approach: if the case of \\\ echo "     test"  /// 
+// the split step will ignore the spaces inside the double quotes, which should not ignore them.
+// We need to reorganise the steps to address this issue!
 
-		// [2] Quote Validation:
-			// Check if quotes (single and double) are balanced (i.e., appear in pairs).
-			// If not balanced: throw a syntax error and prompt again.
+// ------------------------------- Parsing Plan -------------------------------
+// [1] Tokenisation:
+// - Split the input string into tokens, respecting quotes (single and double).
+// - Store each token in a linked list (t_token).
 
-		// [3] Quote Processing:
-			// For tokens with double quotes:
-				// If quotes are balanced:
-					// Check if the quoted content contains a '$' symbol.
-						// If not, remove the quotes and treat as a literal.
-						// If yes, mark it as expandable for variable substitution.
-				// If not balanced: error handled above.
+// [2] Quote Validation:
+// - Ensure that all quotes are properly closed (balanced).
+// - If quotes are unbalanced: return a syntax error and reprompt.
 
-			// Repeat the same check for single quotes:
-				// Remember: variables inside single quotes are *not* expanded.
+// [3] Quote & Expansion Handling:
+//- For tokens wrapped in double quotes:
+// - Remove the quotes.
+// - If they contain '$', mark the token as expandable (for variable expansion).
+//- For tokens in single quotes:
+// - Remove the quotes.
+// - Do NOT expand variables inside single quotes (treat content as literal).
 
-		// [4] Token Categorisation:
-			// For each token:
-				// Identify whether it's:
-					// a command (likely the first token)
-					// an option (starts with '-')
-					// a file or path (contains '/', or detected during redirection)
-					// a redirection operator ('>', '>>', '<', '<<')
-					// a pipe symbol ('|')
+// [4] Token Classification:
+//- Categorise each token in the linked list as one of:
+// - COMMAND      → typically the first word
+// - ARGUMENT     → follows a command
+// - OPTION       → starts with '-'
+// - REDIRECTION  → '>', '>>', '<', '<<'
+// - PIPE         → '|'
+// - FILENAME     → token after a redirection
+//- This prepares for command structure building.
 
-		// [5] (Later) Build a Command Table or Abstract Syntax Tree (AST) from the tokens.
+// [5] Build the Command Table:
+//- Convert the token list into a linked list of commands (t_command).
+//- Each node represents a command with its:
+// - arguments
+// - redirections
+// - and pipe info.
+
+typedef	struct s_token
+{
+	char			*value;
+	int				type;
+	struct s_token	*next;
+} t_token;
+
 
 int	main(void)
 {
 	char	*input;
+	char	**temp;
+	t_token	*tokens;
+	int		i;
 
 	while (1)
 	{
 		input = readline("minishell$ ");
 		if (!input)
-			break;
+			break ;
 		add_history(input);
+		temp = ft_split(input, ' ');
+		i = 0;
+		while (temp[i])
+		{
+			tokens->value = temp[i];
+		}
 	}
 }
-
