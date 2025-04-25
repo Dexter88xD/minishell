@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:53:26 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/25 11:59:30 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:04:11 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@
 
 #include "minishell.h"
 
-// Found issue with this approach: if the case of \\\ echo "     test"  /// 
-// the split step will ignore the spaces inside the double quotes, which should not ignore them.
-// We need to reorganise the steps to address this issue!
+//Notes:
+// Dexter: Found issue with this approach: if the case of \\\ echo "     test"  /// 
+			// the split step will ignore the spaces inside the double quotes, which should not ignore them.
+			// We need to reorganise the steps to address this issue!
 
+// Khalid: 
+			
 // ------------------------------- Parsing Plan -------------------------------
 // [1] Tokenisation:
 // - Split the input string into tokens, respecting quotes (single and double).
@@ -67,8 +70,8 @@ typedef	struct s_token
 int	main(void)
 {
 	char	*input;
-	char	**temp;
-	t_token	*tokens;
+	// char	**temp;
+	// t_token	*tokens = NULL;
 	int		i;
 
 	while (1)
@@ -77,11 +80,20 @@ int	main(void)
 		if (!input)
 			break ;
 		add_history(input);
-		temp = ft_split(input, ' ');
 		i = 0;
-		while (temp[i])
+		while (input[i])
 		{
-			tokens->value = temp[i];
+			//if input[i] == space
+				//copy the string before 
+			//if input[i] == tab
+			//if input[i] == new line
+			//if input[i] == dollar sign
+			//if input[i] == double quotes
+				//copy the content until the next double "quotes"
+			//if input[i] == single quotes
+			//if input[i] == redirection (input or output)
+			//if input[i] == here-doc
+			//if input[i] == pipe
 		}
 	}
 }
