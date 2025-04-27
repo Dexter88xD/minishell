@@ -5,18 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 10:53:26 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/27 15:15:57 by kakbour          ###   ########.fr       */
+/*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
+/*   Updated: 2025/04/27 15:24:43 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-
-#include "minishell.h"
 
 //Notes:
 // Dexter: Found issue with this approach: if the case of \\\ echo "     test"  /// 
@@ -59,12 +51,7 @@
 // - redirections
 // - and pipe info.
 
-typedef	struct s_token
-{
-	char			*value;
-	int				type;
-	struct s_token	*next;
-} t_token;
+#include "minishell.h"
 
 // char *recognizer(char c, char next)
 // {
@@ -146,33 +133,22 @@ char	*ft_edit_input(char *input)
 	printf("-->%s\n", edited_input);
 	return edited_input;
 }
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	char	*input_mise;
 	// t_token	*tokens = NULL;
-	int		i;
 	while (1)
 	{
 		input = readline("minishell$ ");
 		input_mise = ft_edit_input(input);
 		add_history(input);
-		i = 0;
-		while (input[i])
-		{
-			//if input[i] == space
-				//copy the string before 
-			//if input[i] == tab
-			//if input[i] == new line
-			//if input[i] == dollar sign
-			//if input[i] == double quotes
-				//copy the content until the next double "quotes"
-			//if input[i] == single quotes
-			//if input[i] == redirection (input or output)
-			//if input[i] == here-doc
-			//if input[i] == pipe
-		}
 	}
+	(void)argc;
+	(void)argv;
+	(void)envp;
+	return (0);
+	
 }
 
 //<< >> < > | '\'' '\"'

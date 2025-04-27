@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:14:36 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/25 11:34:52 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/04/27 15:24:15 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,12 @@
 # include "parser.h"
 # include "signals.h"
 # include "utils.h"
+
+typedef	struct s_token
+{
+	char			*value;
+	int				type;
+	struct s_token	*next;
+} t_token;
 
 #endif

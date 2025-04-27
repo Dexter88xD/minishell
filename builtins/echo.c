@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 11:15:55 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/27 11:37:55 by sohamdan         ###   ########.fr       */
+/*   Created: 2025/04/27 10:42:37 by sohamdan          #+#    #+#             */
+/*   Updated: 2025/04/27 11:35:26 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "builtin.h"
 
-# include "minishell.h"
-
-int ft_echo(char *arg, int option);
-
-#endif
+int ft_echo(char *arg, int option)
+{
+	printf("%s", arg);
+	if (option == 0)
+		printf("\n");
+	return (0);
+}

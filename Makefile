@@ -1,4 +1,4 @@
-#This is the brain of the whole operation.
+#This is the Captin speaking!
 #Let's get this ship going!
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -62,7 +62,8 @@ OBJ_DIR		= obj
 
 NAME		= minishell
 
-BLT_SRCS	=
+
+BLT_SRCS	= cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
 ENV_SRCS	=
 
