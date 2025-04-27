@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:53:26 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/25 11:59:30 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/04/27 14:47:26 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,103 @@ typedef	struct s_token
 	struct s_token	*next;
 } t_token;
 
+// char *recognizer(char c, char next)
+// {
+// 	if (c == '<')
+// 	{
+// 		if(next == '<')
+// 			return("<<");
+// 		return ("<");
+// 	}
+// 	else if (c == '>')
+// 	{
+// 		if(next == '>')
+// 			return (">>");
+// 		return (">");
+// 	}
+// 	else if (c == '|')
+// 		return ("|");
+// 	else
+// 		return(NULL);
+// }
 
-int	main(void)
+// t_token *ft_return_tokens(char *input)
+// {
+// 	t_token *tokenazer;
+
+// 	tokenazer = NULL;
+// 	int i  = 0;
+// 	while(input[i])
+// 	{
+// 		if(recognizer(input[i] , input[i + 1]))
+			
+			
+// 	}
+// }
+// int ft_len(char *input)
+// {
+// 	int i = 1;
+// 	int flag = 0;
+// 	while(input[i] != '"' && input[i])
+// 	{
+// 		i++;
+// 		if(input[i] == '"' && input[i])
+// 		{
+// 			if(input[i + 1] == ' ' && input[i])
+// 			{
+// 				flag = 1;
+// 				return(i);
+// 			}
+// 			if(input[i + 1] != ' ' && input[i])
+				
+// 		}
+// 	}
+// }
+// ls -la | echo "   test"test"   " | cat "  infile"
+// result = ls -la | echo "   testtest   " | cat infile
+char	*ft_edit_input(char *input)
+{
+	char	*edited_input = malloc(1025);
+	int		is_find = 1;
+	int		sisi = 1;
+	int		i = 0;
+	int		j = 0;
+	while(input[i])
+	{
+		
+		if(input[i] == '"' && sisi == 1)
+			is_find = !is_find;
+		else if(input[i] == '\'' && is_find == 1)
+			sisi = !sisi;
+		else
+		{
+			edited_input[j] = input[i];
+			j++;
+		}
+		i++; 
+	}
+	if(!is_find || !sisi)
+		return(write(1, "Syntax Error\n", 13) ,NULL);
+	printf("-->%s\n", edited_input);
+	return edited_input;
+}
+int	main(int argc, char **argv, char **env)
 {
 	char	*input;
-	char	**temp;
 	t_token	*tokens;
-	int		i;
-
+	char	*input_mise;
+	
+	(void)argv;
+	(void)argc;
+	(void)env;
+	tokens = NULL;
 	while (1)
 	{
 		input = readline("minishell$ ");
-		if (!input)
-			break ;
+		input_mise = ft_edit_input(input);
 		add_history(input);
-		temp = ft_split(input, ' ');
-		i = 0;
-		while (temp[i])
-		{
-			tokens->value = temp[i];
-		}
 	}
 }
+
+//<< >> < > | '\'' '\"'
+//<< hello > file1 < file2  file infile 
