@@ -6,7 +6,7 @@
 /*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:53:26 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/27 14:47:26 by kakbour          ###   ########.fr       */
+/*   Updated: 2025/04/27 15:15:57 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@
 
 #include "minishell.h"
 
-// Found issue with this approach: if the case of \\\ echo "     test"  /// 
-// the split step will ignore the spaces inside the double quotes, which should not ignore them.
-// We need to reorganise the steps to address this issue!
+//Notes:
+// Dexter: Found issue with this approach: if the case of \\\ echo "     test"  /// 
+			// the split step will ignore the spaces inside the double quotes, which should not ignore them.
+			// We need to reorganise the steps to address this issue!
 
+// Khalid: 
+			
 // ------------------------------- Parsing Plan -------------------------------
 // [1] Tokenisation:
 // - Split the input string into tokens, respecting quotes (single and double).
@@ -143,21 +146,32 @@ char	*ft_edit_input(char *input)
 	printf("-->%s\n", edited_input);
 	return edited_input;
 }
-int	main(int argc, char **argv, char **env)
+int	main(void)
 {
 	char	*input;
-	t_token	*tokens;
 	char	*input_mise;
-	
-	(void)argv;
-	(void)argc;
-	(void)env;
-	tokens = NULL;
+	// t_token	*tokens = NULL;
+	int		i;
 	while (1)
 	{
 		input = readline("minishell$ ");
 		input_mise = ft_edit_input(input);
 		add_history(input);
+		i = 0;
+		while (input[i])
+		{
+			//if input[i] == space
+				//copy the string before 
+			//if input[i] == tab
+			//if input[i] == new line
+			//if input[i] == dollar sign
+			//if input[i] == double quotes
+				//copy the content until the next double "quotes"
+			//if input[i] == single quotes
+			//if input[i] == redirection (input or output)
+			//if input[i] == here-doc
+			//if input[i] == pipe
+		}
 	}
 }
 
