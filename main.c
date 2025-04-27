@@ -6,15 +6,9 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:53:26 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/25 16:04:11 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/04/27 11:52:07 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 
 #include "minishell.h"
 
@@ -59,41 +53,40 @@
 // - redirections
 // - and pipe info.
 
-typedef	struct s_token
+int	main(int argc, char **argv, char **envp)
 {
-	char			*value;
-	int				type;
-	struct s_token	*next;
-} t_token;
-
-
-int	main(void)
-{
+	char	*ret;
 	char	*input;
-	// char	**temp;
-	// t_token	*tokens = NULL;
-	int		i;
+	int		check;
 
-	while (1)
+	input = readline("minishell$: ");
+	if (!input)
 	{
-		input = readline("minishell$ ");
-		if (!input)
-			break ;
-		add_history(input);
-		i = 0;
-		while (input[i])
+		free(input);
+		return (1);
+	}
+	add_history(input);
+	ret = ft_strchr(input, '-');
+	if (ret)
+	{
+		
+		check = ft_strncmp(ret, "-n", 2);
+		if (!check)
 		{
-			//if input[i] == space
-				//copy the string before 
-			//if input[i] == tab
-			//if input[i] == new line
-			//if input[i] == dollar sign
-			//if input[i] == double quotes
-				//copy the content until the next double "quotes"
-			//if input[i] == single quotes
-			//if input[i] == redirection (input or output)
-			//if input[i] == here-doc
-			//if input[i] == pipe
+			printf("hna\n");
+			ret = ft_strtrim(input, "echo -n");
+			printf("%s", ret);
+			ft_echo(ret, 1);
+		}
+		else
+		{
+			printf("lhih\n");
+			ret = ft_strtrim(input, "echo");
+			ft_echo(ret, 0);
 		}
 	}
+	(void)argc;
+	(void)argv;
+	(void)envp;
+	return (0);
 }
