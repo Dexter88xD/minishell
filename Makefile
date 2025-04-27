@@ -73,25 +73,25 @@ OBJ_DIR		= obj
 NAME		= minishell
 
 # BUILTINS source files
-BLT_SRCS	= placeholder.c
+# BLT_SRCS	= placeholder.c
 
-# ENVIRONMEN source files
-ENV_SRCS	= placeholder.c
+# # ENVIRONMEN source files
+# ENV_SRCS	= placeholder.c
 
-# EXECUTOR source files
-EXEC_SRCS	= placeholder.c
+# # EXECUTOR source files
+# EXEC_SRCS	= placeholder.c
 
-# INCLUDES source files
-INC_SRCS	= placeholder.c
+# # INCLUDES source files
+# INC_SRCS	= placeholder.c
 
-# PARSER source files
-PARSR_SRCS	= placeholder.c
+# # PARSER source files
+# PARSR_SRCS	= placeholder.c
 
-# SIGNALS source files
-SIG_SRCS	= placeholder.c
+# # SIGNALS source files
+# SIG_SRCS	= placeholder.c
 
-# UTILS	 source files
-UTILS_SRCS	= placeholder.c
+# # UTILS	 source files
+# UTILS_SRCS	= placeholder.c
 
 # ALL 	 source files
 SRCS		= main.c \
