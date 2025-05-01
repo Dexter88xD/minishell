@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/04/27 15:24:43 by kakbour          ###   ########.fr       */
+/*   Updated: 2025/05/01 11:44:41 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//Notes:
-// Dexter: Found issue with this approach: if the case of \\\ echo "     test"  /// 
-			// the split step will ignore the spaces inside the double quotes, which should not ignore them.
-			// We need to reorganise the steps to address this issue!
+// Notes:
 
-// Khalid: 
-			
 // ------------------------------- Parsing Plan -------------------------------
 // [1] Tokenisation:
 // - Split the input string into tokens, respecting quotes (single and double).
@@ -24,7 +19,7 @@
 
 // [2] Quote Validation:
 // - Ensure that all quotes are properly closed (balanced).
-// - If quotes are unbalanced: return a syntax error and reprompt.
+// - If quotes are unbalanced: return a syntax error.
 
 // [3] Quote & Expansion Handling:
 //- For tokens wrapped in double quotes:
@@ -52,104 +47,29 @@
 // - and pipe info.
 
 #include "minishell.h"
+#include "builtin.h"
+#include "env.h"
+#include "executor.h"
+#include "libft.h"
+#include "parser.h"
+#include "signals.h"
+#include "utils.h"
 
-// char *recognizer(char c, char next)
-// {
-// 	if (c == '<')
-// 	{
-// 		if(next == '<')
-// 			return("<<");
-// 		return ("<");
-// 	}
-// 	else if (c == '>')
-// 	{
-// 		if(next == '>')
-// 			return (">>");
-// 		return (">");
-// 	}
-// 	else if (c == '|')
-// 		return ("|");
-// 	else
-// 		return(NULL);
-// }
-
-// t_token *ft_return_tokens(char *input)
-// {
-// 	t_token *tokenazer;
-
-// 	tokenazer = NULL;
-// 	int i  = 0;
-// 	while(input[i])
-// 	{
-// 		if(recognizer(input[i] , input[i + 1]))
-			
-			
-// 	}
-// }
-// int ft_len(char *input)
-// {
-// 	int i = 1;
-// 	int flag = 0;
-// 	while(input[i] != '"' && input[i])
-// 	{
-// 		i++;
-// 		if(input[i] == '"' && input[i])
-// 		{
-// 			if(input[i + 1] == ' ' && input[i])
-// 			{
-// 				flag = 1;
-// 				return(i);
-// 			}
-// 			if(input[i + 1] != ' ' && input[i])
-				
-// 		}
-// 	}
-// }
-// ls -la | echo "   test"test"   " | cat "  infile"
-// result = ls -la | echo "   testtest   " | cat infile
-char	*ft_edit_input(char *input)
+int	main(void)
 {
-	char	*edited_input = malloc(1025);
-	int		is_find = 1;
-	int		sisi = 1;
-	int		i = 0;
-	int		j = 0;
-	while(input[i])
-	{
-		
-		if(input[i] == '"' && sisi == 1)
-			is_find = !is_find;
-		else if(input[i] == '\'' && is_find == 1)
-			sisi = !sisi;
-		else
-		{
-			edited_input[j] = input[i];
-			j++;
-		}
-		i++; 
-	}
-	if(!is_find || !sisi)
-		return(write(1, "Syntax Error\n", 13) ,NULL);
-	printf("-->%s\n", edited_input);
-	return edited_input;
-}
-int	main(int argc, char **argv, char **envp)
-{
-	char	*input;
-	char	*input_mise;
-	// t_token	*tokens = NULL;
+	char		*input;
+	t_token		*first_input;
+
 	while (1)
 	{
 		input = readline("minishell$ ");
-		input_mise = ft_edit_input(input);
 		add_history(input);
+		first_input = ft_edit_input(input);
+		while (first_input)
+		{
+			printf("node: >%s<\n", (char *)first_input->value);
+			first_input = first_input->next;
+		}
 	}
-	(void)argc;
-	(void)argv;
-	(void)envp;
 	return (0);
-	
 }
-
-//<< >> < > | '\'' '\"'
-//<< hello > file1 < file2  file infile 

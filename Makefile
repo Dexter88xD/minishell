@@ -30,7 +30,7 @@ RESET        = \\033[0m
 # ──────────────────────────────────────────────────────────────────────────────
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I $(LIBFT) -I $(INC_DIR)
+CFLAGS		= -Wall -Wextra -Werror -g -I $(LIBFT) -I $(INC_DIR)
 LIB_FLAGS	= -L$(LIBFT) -lft
 RM			= rm -rf
 
@@ -71,11 +71,11 @@ EXEC_SRCS	=
 
 INC_SRCS	=
 
-PARSR_SRCS	=
+PARSR_SRCS	= parser.c tokeniser.c
 
 SIG_SRCS	=
 
-UTILS_SRCS	=
+UTILS_SRCS	= linked_list_utils.c
 
 SRCS		= main.c \
 			$(addprefix $(BLT_DIR)/, $(BLT_SRCS))\

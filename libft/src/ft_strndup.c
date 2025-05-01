@@ -1,14 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 10:42:45 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/29 11:07:20 by sohamdan         ###   ########.fr       */
+/*   Created: 2025/05/01 11:41:41 by sohamdan          #+#    #+#             */
+/*   Updated: 2025/05/01 11:42:16 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "builtin.h"
+#include "libft.h"
+
+char	*ft_strndup(const char *s, size_t len)
+{
+	char	*buffer;
+
+	if (s == NULL)
+		return (NULL);
+	if (len == 0)
+		len = ft_strlen(s);
+	buffer = (char *)malloc((len + 1) * sizeof(*s));
+	if (buffer == NULL)
+		return (NULL);
+	buffer = ft_memcpy(buffer, s, len);
+	buffer[len] = '\0';
+	return (buffer);
+}

@@ -15,6 +15,6 @@
 
 # include "minishell.h"
 
-int ft_echo(char *arg, int option);
+int	ft_echo(char *arg, int option);
 
 #endif

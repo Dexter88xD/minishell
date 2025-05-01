@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:20:19 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/04/24 12:03:53 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:42:39 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*ft_itoa(int n);
 char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
+char	*ft_strndup(const char *s, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -108,7 +109,6 @@ int		ft_printf(const char *s, ...);
 #  define BUFFER_SIZE 0
 # endif
 
-char	*ft_strndup(const char *s, size_t len);
 char	*ft_custom_strchr(const char *s, int c);
 char	*get_next_line(int fd);
 
