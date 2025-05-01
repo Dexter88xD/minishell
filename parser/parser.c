@@ -24,17 +24,16 @@ t_token	*ft_edit_input(char *input)
 
 	i = 0;
 	j = 0;
-	in_end = 0;
-	is_space = 0;
 	edited_input = NULL;
 	while (input[i])
 	{
+		/*the in_end and is_space need to reset*/
+		in_end = 0;
+		is_space = 0;
 		j = ft_find_end(input + i, &is_space, &in_end);
 		if (is_space != 1)
-		{
 			ft_add_node_back(&edited_input,
 				ft_new_node(ft_strndup(input + i++, j + 1)));
-		}
 		if ((is_space == 1 || in_end == 1) && i != 0)
 			if (ft_last_node(edited_input)->value[0] != ' ')
 				ft_add_node_back(&edited_input, ft_new_node(" "));

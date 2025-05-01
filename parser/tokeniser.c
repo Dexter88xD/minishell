@@ -14,16 +14,19 @@
 #include "parser.h"
 #include "utils.h"
 
-int	ft_is_end(char *delimiter, char *input, int *in_end, int *i)
+/*change here*/
+void	ft_is_end(char *delimiter, char *input, int *in_end, int *i)
 {
-	if (ft_strchr(delimiter, input[*i + 1]) || input[*i] == ' ')
+	while (input[*i])
 	{
-		if (input[*i] == ' ')
-			*in_end = 1;
-		return (1);
+		if (ft_strchr(delimiter, input[*i + 1]) || input[*i + 1] == ' ')
+		{
+			if (input[*i + 1] == ' ')
+				*in_end = 1;
+			break ;
+		}
+		(*i)++;
 	}
-	(*i)++;
-	return (0);
 }
 
 int	ft_isspace(int c)
@@ -33,25 +36,24 @@ int	ft_isspace(int c)
 	return (0);
 }
 
-char	which_meta(char c)
-{
-	if (c == '"')
-		return ('"');
-	if (c == '\'')
-		return ('\'');
-	else
-		return (c);
-}
+// char	which_meta(char c)
+// {
+// 	// if (c == '"')
+// 	// 	return ('"');
+// 	// if (c == '\'')
+// 	// 	return ('\'');
+// 	else
+// 		return (c);
+// }
 
+/*small changes in this function*/
 int	ft_find_end(char *input, int *is_space, int *in_end)
 {
 	int		i;
-	char	meta_end;
 	char	*delimiter;
 
 	i = 0;
 	delimiter = "\"\'";
-	meta_end = which_meta(input[i]);
 	if (ft_isspace(input[i]))
 	{
 		*is_space = 1;
@@ -61,15 +63,13 @@ int	ft_find_end(char *input, int *is_space, int *in_end)
 	else if (ft_strchr((const char *)delimiter, input[i]))
 	{
 		i++;
-		while (input[i] && input[i] != meta_end)
+		while (input[i] && input[i] != *input)
 			i++;
 	}
 	else
 	{
 		i++;
-		while (input[i])
-			if (ft_is_end(delimiter, input, in_end, &i))
-				break ;
+		ft_is_end(delimiter, input, in_end, &i);
 	}
 	return (i);
 }
