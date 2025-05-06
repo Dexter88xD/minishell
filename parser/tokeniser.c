@@ -40,7 +40,7 @@ void	ft_is_end(char *delimiter, char *input, int *in_end, int *i)
 {
 	while (input[*i])
 	{
-		if (ft_strchr(delimiter, input[*i + 1]) || input[*i + 1] == ' ')
+		if (ft_strchr(delimiter, input[*i + 1]) || input[*i + 1] == ' ' || input[*i + 1] == '|' || input[*i + 1] == '<' || input[*i + 1] == '>' )
 		{
 			if (input[*i + 1] == ' ')
 				*in_end = 1;
@@ -57,8 +57,14 @@ int	ft_find_end(char *input, int *is_space, int *in_end)
 	char	*delimiter;
 
 	i = 0;
-	delimiter = "\"\'";
-	if (ft_isspace(input[i]))
+	delimiter = "\"\'<>";
+	/*added this delemeters (<,>,|)*/
+	if(input[i] == '<' || input[i] == '>' || input[i] == '|')
+	{
+		if(input[i + 1] == '<' || input[i + 1] == '>')
+			i++;
+	}
+	else if (ft_isspace(input[i]))
 	{
 		*is_space = 1;
 		while (ft_isspace(input[i]))
@@ -72,7 +78,8 @@ int	ft_find_end(char *input, int *is_space, int *in_end)
 	}
 	else
 	{
-		i++;
+		/*just in this i++ because i give it already in space , t9adat hhh*/
+		//i++;
 		ft_is_end(delimiter, input, in_end, &i);
 	}
 	return (i);
