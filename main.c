@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/05/01 11:44:41 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:44:06 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,45 @@
 // - redirections
 // - and pipe info.
 
-#include "minishell.h"
 #include "builtin.h"
 #include "env.h"
 #include "executor.h"
 #include "libft.h"
+#include "minishell.h"
 #include "parser.h"
 #include "signals.h"
 #include "utils.h"
 
 int	main(void)
 {
-	char		*input;
-	t_token		*first_input;
+	char	*ret;
+	t_token	*input;
+	t_token	*temp;
 
 	while (1)
 	{
-		input = readline("minishell$ ");
-		add_history(input);
-		first_input = ft_edit_input(input);
-		while (first_input)
+		ret = readline("minishell$ ");
+		if (!ret)
+			break ;
+		add_history(ret);
+		input = ft_edit_input(ret);
+		temp = input;
+		printf("before\n");
+		while (temp)
 		{
-			printf("node: >%s<\n", (char *)first_input->value);
-			first_input = first_input->next;
+			printf("node before: >%s<", (char *)temp->value);
+			printf("\n");
+			temp = temp->next;
+		}
+		temp = input;
+		ft_filtering_spaces(temp);
+		temp = input;
+		printf("\nafter\n");
+		while (temp)
+		{
+			printf("node : >%s<", (char *)temp->value);
+			printf("\n");
+			temp = temp->next;
 		}
 	}
 	return (0);
