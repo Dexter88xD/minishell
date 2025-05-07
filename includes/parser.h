@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:16:27 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/06 11:45:04 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:09:38 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 int		ft_find_end(char *input, int *is_space, int *in_end);
 
+void	ft_setting_types(t_token *input);
 void	ft_filtering_spaces(t_token *temp);
 
 t_token	*ft_edit_input(char *input);

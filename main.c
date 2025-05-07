@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/05/07 11:23:21 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/07 17:01:13 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@
 #include "signals.h"
 #include "utils.h"
 
+const char	*token_type_to_str(t_type type)
+{
+	static const char	*names[] = {"UNKNOWN", "CMD", "ARG", "OPERATOR"};
+
+	return (names[type]);
+}
+
 int	main(void)
 {
 	char	*ret;
@@ -69,20 +76,12 @@ int	main(void)
 		add_history(ret);
 		input = ft_edit_input(ret);
 		temp = input;
-		printf("before\n");
-		while (temp)
-		{
-			printf("node before: ~%s~", (char *)temp->value);
-			printf("\n");
-			temp = temp->next;
-		}
-		temp = input;
 		ft_filtering_spaces(temp);
-		temp = input;
-		printf("\nafter\n");
+		ft_setting_types(temp);
 		while (temp)
 		{
-			printf("node : ~%s~", (char *)temp->value);
+			printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
+				token_type_to_str(temp->type));
 			printf("\n");
 			temp = temp->next;
 		}
