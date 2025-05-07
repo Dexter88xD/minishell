@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/05/06 11:44:06 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/07 11:23:21 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(void)
 		printf("before\n");
 		while (temp)
 		{
-			printf("node before: >%s<", (char *)temp->value);
+			printf("node before: ~%s~", (char *)temp->value);
 			printf("\n");
 			temp = temp->next;
 		}
@@ -82,7 +82,7 @@ int	main(void)
 		printf("\nafter\n");
 		while (temp)
 		{
-			printf("node : >%s<", (char *)temp->value);
+			printf("node : ~%s~", (char *)temp->value);
 			printf("\n");
 			temp = temp->next;
 		}

@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:18:53 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/05 10:22:45 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:55:28 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_token	*ft_edit_input(char *input)
 	edited_input = NULL;
 	while (input[i])
 	{
-		/*the in_end and is_space need to reset*/
 		in_end = 0;
 		is_space = 0;
 		j = ft_find_end(input + i, &is_space, &in_end);
