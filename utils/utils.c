@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 00:43:06 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/07 15:42:15 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:03:18 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int	is_operator(char *str)
 		|| !ft_strcmp(str, ">")
 		|| !ft_strcmp(str, "<<")
 		|| !ft_strcmp(str, ">>")
+		|| !ft_strcmp(str, "<>")
+		|| !ft_strcmp(str, "><")
 	);
 }

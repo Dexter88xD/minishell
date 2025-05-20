@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/05/07 17:01:13 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:58:49 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	main(void)
 
 	while (1)
 	{
+		ft_memset(&input, 0, sizeof(t_token *));
+		ft_memset(&temp, 0, sizeof(t_token *));
 		ret = readline("minishell$ ");
 		if (!ret)
 			break ;
@@ -80,9 +82,19 @@ int	main(void)
 		ft_setting_types(temp);
 		while (temp)
 		{
+			printf("\n");
 			printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
 				token_type_to_str(temp->type));
-			printf("\n");
+			temp = temp->next;
+		}
+		temp = input;
+		while (temp)
+		{
+			if (!ft_strcmp(temp->value, "echo"))
+				if (temp->next)
+					ft_echo(temp->next);
+			if (!temp->next)
+				break ;
 			temp = temp->next;
 		}
 	}
