@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/05/20 16:58:49 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:08:39 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@
 // - redirections
 // - and pipe info.
 
+#include "minishell.h"
 #include "builtin.h"
 #include "env.h"
 #include "executor.h"
 #include "libft.h"
-#include "minishell.h"
 #include "parser.h"
 #include "signals.h"
 #include "utils.h"
@@ -68,26 +68,30 @@ int	main(void)
 	t_token	*input;
 	t_token	*temp;
 
+	ft_memset(&input, 0, sizeof(t_token *));
+	ft_memset(&temp, 0, sizeof(t_token *));
 	while (1)
 	{
-		ft_memset(&input, 0, sizeof(t_token *));
-		ft_memset(&temp, 0, sizeof(t_token *));
 		ret = readline("minishell$ ");
 		if (!ret)
-			break ;
+		{
+			if (input)
+				ft_del_lst(input);
+			exit(1);
+		}
 		add_history(ret);
 		input = ft_edit_input(ret);
 		temp = input;
 		ft_filtering_spaces(temp);
 		ft_setting_types(temp);
-		while (temp)
-		{
-			printf("\n");
-			printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
-				token_type_to_str(temp->type));
-			temp = temp->next;
-		}
-		temp = input;
+		// while (temp)
+		// {
+		// 	printf("\n");
+		// 	printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
+		// 		token_type_to_str(temp->type));
+		// 	temp = temp->next;
+		// }
+		// temp = input;
 		while (temp)
 		{
 			if (!ft_strcmp(temp->value, "echo"))
@@ -98,5 +102,7 @@ int	main(void)
 			temp = temp->next;
 		}
 	}
+	if (input)
+		ft_del_lst(input);
 	return (0);
 }

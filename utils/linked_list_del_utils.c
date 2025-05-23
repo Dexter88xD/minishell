@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:45:11 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/05 11:23:25 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:07:39 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	ft_del_lst(t_token *node)
 
 	while (node)
 	{
-		temp = node;
-		node = node->next;
-		free(temp);
+		temp = node->next;
+		free(node->value);
+		free(node);
+		node = temp;
 	}
 }
 

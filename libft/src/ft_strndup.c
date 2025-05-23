@@ -6,11 +6,12 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 11:41:41 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/01 11:42:16 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:04:03 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_strndup(const char *s, size_t len)
 {
