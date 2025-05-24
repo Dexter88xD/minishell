@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:42:37 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/23 15:40:52 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:42:09 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*ft_filter_quotes(t_token *argument)
 	i = 0;
 	index = 0;
 	outcome = malloc(sizeof(argument->value));
+	if (!outcome)
+		return (NULL);
 	while (argument->value[i])
 	{
 		if (argument->value[i] == '"')
@@ -47,6 +49,7 @@ char	*ft_filter_quotes(t_token *argument)
 int	ft_echo(t_token *argument)
 {
 	int	no_newline;
+	char	*temp;
 
 	no_newline = 0;
 	while (argument && argument->type != OPERATOR)
@@ -58,14 +61,15 @@ int	ft_echo(t_token *argument)
 				no_newline = 1;
 				argument = argument->next;
 				if (!argument)
-				break ;
+					break ;
 			}
 		}
-		argument->value = ft_filter_quotes(argument);
-		if (!argument->value)
-			printf("khawarti\n");
-		else
-			printf("%s", argument->value);
+		temp = ft_filter_quotes(argument);
+		if (!temp)
+			return (-1);
+		free(argument->value);
+		argument->value = temp;
+		printf("%s", argument->value);
 		if (argument->next)
 			printf(" ");
 		argument = argument->next;

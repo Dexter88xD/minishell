@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/05/23 17:08:39 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:38:21 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	main(void)
 	t_token	*input;
 	t_token	*temp;
 
-	ft_memset(&input, 0, sizeof(t_token *));
-	ft_memset(&temp, 0, sizeof(t_token *));
+	input = NULL;
+	temp = NULL;
 	while (1)
 	{
 		ret = readline("minishell$ ");
@@ -79,19 +79,22 @@ int	main(void)
 				ft_del_lst(input);
 			exit(1);
 		}
+		if (input)
+			ft_del_lst(input);
 		add_history(ret);
 		input = ft_edit_input(ret);
+		ft_filtering_spaces(input);
+		ft_setting_types(input);
 		temp = input;
-		ft_filtering_spaces(temp);
-		ft_setting_types(temp);
-		// while (temp)
-		// {
-		// 	printf("\n");
-		// 	printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
-		// 		token_type_to_str(temp->type));
-		// 	temp = temp->next;
-		// }
-		// temp = input;
+		while (temp)
+		{
+			printf("\n");
+			printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
+				token_type_to_str(temp->type));
+			temp = temp->next;
+		}
+		printf("\nThis is the expected outcome! >>>>>>\n\n");
+		temp = input;
 		while (temp)
 		{
 			if (!ft_strcmp(temp->value, "echo"))
@@ -101,8 +104,8 @@ int	main(void)
 				break ;
 			temp = temp->next;
 		}
+		printf("\n<<<<<done!\n\n");
 	}
-	if (input)
-		ft_del_lst(input);
+	free(ret);
 	return (0);
 }
