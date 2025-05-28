@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/05/28 19:25:39 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 22:24:32 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@
 // - and pipe info.
 
 #include "minishell.h"
+#include "executor.h"
 #include "builtin.h"
 #include "env.h"
-#include "executor.h"
 #include "libft.h"
 #include "parser.h"
 #include "signals.h"
@@ -66,10 +66,8 @@ int	main(void)
 {
 	char	*ret;
 	t_token	*input;
-	t_token	*temp;
 
 	input = NULL;
-	temp = NULL;
 	while (1)
 	{
 		ret = readline("minishell$ ");
@@ -82,20 +80,17 @@ int	main(void)
 		if (input)
 			ft_del_lst(input);
 		add_history(ret);
-		input = ft_edit_input(ret);
-		ft_filtering_spaces(input);
-		ft_setting_types(input);
-		temp = input;
-		while (temp)
-		{
-			if (!ft_strcmp(temp->value, "echo"))
-				if (temp->next)
-					ft_echo(temp->next);
-			if (!temp->next)
-				break ;
-			temp = temp->next;
-		}
+		input = parsing(ret);
+		excution(input);
 		free(ret);
 	}
 	return (0);
 }
+// temp = input;
+// while (temp)
+// {
+// 	printf("\n");
+// 	printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
+// 		token_type_to_str(temp->type));
+// 	temp = temp->next;
+// }

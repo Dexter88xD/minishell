@@ -6,12 +6,38 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:42:37 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/28 19:26:23 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 21:39:34 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "minishell.h"
+
+void	double_quotes(t_token *argument, char *outcome, int *i, int *index)
+{
+	(*i)++;
+	while (argument->value && argument->value[(*i)] != '"')
+	{
+		outcome[(*index)] = argument->value[(*i)];
+		(*index)++;
+		(*i)++;
+	}
+	if (argument->value[(*i)] == '"')
+		(*i)++;
+}
+
+void	single_quotes(t_token *argument, char *outcome, int *i, int *index)
+{
+	(*i)++;
+	while (argument->value && argument->value[(*i)] != '\'')
+	{
+		outcome[(*index)] = argument->value[(*i)];
+		(*index)++;
+		(*i)++;
+	}
+	if (argument->value[(*i)] == '\'')
+		(*i)++;
+}
 
 char	*ft_filter_quotes(t_token *argument)
 {
@@ -27,17 +53,9 @@ char	*ft_filter_quotes(t_token *argument)
 	while (argument->value[i])
 	{
 		if (argument->value[i] == '"')
-		{
-			i++;
-			while (argument->value && argument->value[i] != '"')
-			{
-				outcome[index] = argument->value[i];
-				index++;
-				i++;
-			}
-			if (argument->value[i] == '"')
-				i++;
-		}
+			double_quotes(argument, outcome, &i, &index);
+		else if (argument->value[i] == '\'')
+			single_quotes(argument, outcome, &i, &index);
 		else
 		{
 			outcome[index] = argument->value[i];

@@ -6,10 +6,12 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:18:53 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/28 19:23:42 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 22:14:22 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "builtin.h"
+#include "executor.h"
 #include "minishell.h"
 #include "parser.h"
 #include "utils.h"
@@ -93,4 +95,17 @@ t_token	*ft_edit_input(char *input)
 		i += j;
 	}
 	return (edited_input);
+}
+
+t_token	*parsing(char *ret)
+{
+	t_token	*input;
+	t_token	*temp;
+
+	input = NULL;
+	temp = NULL;
+	input = ft_edit_input(ret);
+	ft_filtering_spaces(input);
+	ft_setting_types(input);
+	return (input);
 }
