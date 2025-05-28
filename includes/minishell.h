@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:14:36 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/07 17:00:16 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:18:35 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 # include "libft.h"
 
+# define MALLOCED 1
+
 typedef enum e_type
 {
 	CMD = 1,
@@ -38,6 +40,7 @@ typedef struct s_token
 {
 	char			*value;
 	t_type			type;
+	int				malloced;
 	struct s_token	*previous;
 	struct s_token	*next;
 }	t_token;

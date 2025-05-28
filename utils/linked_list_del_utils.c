@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:45:11 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/23 17:07:39 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:23:29 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ void	ft_del_node(t_token *node)
 		if (!node->previous && node->next)
 			node->next->previous = NULL;
 	}
+	if (node->malloced)
+		free(node->value);
 	free(node);
 }

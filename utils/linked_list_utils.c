@@ -6,14 +6,14 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:45:11 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/05 11:08:14 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:19:00 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "utils.h"
 
-t_token	*ft_new_node(void *content)
+t_token	*ft_new_node(void *content, int malloced)
 {
 	t_token	*new_node;
 
@@ -22,6 +22,7 @@ t_token	*ft_new_node(void *content)
 		return (NULL);
 	(*new_node).value = content;
 	(*new_node).type = 0;
+	(*new_node).malloced = malloced;
 	(*new_node).previous = NULL;
 	(*new_node).next = NULL;
 	return (new_node);

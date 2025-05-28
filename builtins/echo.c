@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:42:37 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/24 15:42:09 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:26:23 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_filter_quotes(t_token *argument)
 
 	i = 0;
 	index = 0;
-	outcome = malloc(sizeof(argument->value));
+	outcome = malloc(ft_strlen(argument->value) * sizeof(argument->value));
 	if (!outcome)
 		return (NULL);
 	while (argument->value[i])
@@ -32,38 +32,36 @@ char	*ft_filter_quotes(t_token *argument)
 			while (argument->value && argument->value[i] != '"')
 			{
 				outcome[index] = argument->value[i];
+				index++;
 				i++;
 			}
-			if (argument->value && argument->next && argument->value[i] == '"')
-			i++;
+			if (argument->value[i] == '"')
+				i++;
 		}
 		else
+		{
 			outcome[index] = argument->value[i];
-		i++;
-		index++;
+			index++;
+			i++;
+		}
 	}
 	outcome[index] = '\0';
-	return (outcome);	
+	return (outcome);
 }
 
 int	ft_echo(t_token *argument)
 {
-	int	no_newline;
+	int		no_newline;
 	char	*temp;
 
 	no_newline = 0;
+	if (!ft_strcmp(argument->value, "-n"))
+	{
+		no_newline = 1;
+		argument = argument->next;
+	}
 	while (argument && argument->type != OPERATOR)
 	{
-		if (argument->value[0] == '-')
-		{
-			if (!ft_strcmp(argument->value, "-n"))
-			{
-				no_newline = 1;
-				argument = argument->next;
-				if (!argument)
-					break ;
-			}
-		}
 		temp = ft_filter_quotes(argument);
 		if (!temp)
 			return (-1);

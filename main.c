@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/05/24 15:38:21 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:25:39 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,6 @@ int	main(void)
 		temp = input;
 		while (temp)
 		{
-			printf("\n");
-			printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
-				token_type_to_str(temp->type));
-			temp = temp->next;
-		}
-		printf("\nThis is the expected outcome! >>>>>>\n\n");
-		temp = input;
-		while (temp)
-		{
 			if (!ft_strcmp(temp->value, "echo"))
 				if (temp->next)
 					ft_echo(temp->next);
@@ -104,8 +95,7 @@ int	main(void)
 				break ;
 			temp = temp->next;
 		}
-		printf("\n<<<<<done!\n\n");
+		free(ret);
 	}
-	free(ret);
 	return (0);
 }
