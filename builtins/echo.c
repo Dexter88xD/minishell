@@ -6,71 +6,17 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:42:37 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/28 21:39:34 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/30 00:35:09 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "parser.h"
 #include "minishell.h"
-
-void	double_quotes(t_token *argument, char *outcome, int *i, int *index)
-{
-	(*i)++;
-	while (argument->value && argument->value[(*i)] != '"')
-	{
-		outcome[(*index)] = argument->value[(*i)];
-		(*index)++;
-		(*i)++;
-	}
-	if (argument->value[(*i)] == '"')
-		(*i)++;
-}
-
-void	single_quotes(t_token *argument, char *outcome, int *i, int *index)
-{
-	(*i)++;
-	while (argument->value && argument->value[(*i)] != '\'')
-	{
-		outcome[(*index)] = argument->value[(*i)];
-		(*index)++;
-		(*i)++;
-	}
-	if (argument->value[(*i)] == '\'')
-		(*i)++;
-}
-
-char	*ft_filter_quotes(t_token *argument)
-{
-	int		i;
-	int		index;
-	char	*outcome;
-
-	i = 0;
-	index = 0;
-	outcome = malloc(ft_strlen(argument->value) * sizeof(argument->value));
-	if (!outcome)
-		return (NULL);
-	while (argument->value[i])
-	{
-		if (argument->value[i] == '"')
-			double_quotes(argument, outcome, &i, &index);
-		else if (argument->value[i] == '\'')
-			single_quotes(argument, outcome, &i, &index);
-		else
-		{
-			outcome[index] = argument->value[i];
-			index++;
-			i++;
-		}
-	}
-	outcome[index] = '\0';
-	return (outcome);
-}
 
 int	ft_echo(t_token *argument)
 {
 	int		no_newline;
-	char	*temp;
 
 	no_newline = 0;
 	if (!ft_strcmp(argument->value, "-n"))
@@ -80,11 +26,6 @@ int	ft_echo(t_token *argument)
 	}
 	while (argument && argument->type != OPERATOR)
 	{
-		temp = ft_filter_quotes(argument);
-		if (!temp)
-			return (-1);
-		free(argument->value);
-		argument->value = temp;
 		printf("%s", argument->value);
 		if (argument->next)
 			printf(" ");
@@ -92,5 +33,5 @@ int	ft_echo(t_token *argument)
 	}
 	if (no_newline == 0)
 		printf("\n");
-	return (0);
+	return (1);
 }

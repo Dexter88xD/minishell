@@ -71,7 +71,7 @@ EXEC_SRCS	= excution.c
 
 INC_SRCS	=
 
-PARSR_SRCS	= parser.c tokeniser.c
+PARSR_SRCS	= parser.c tokeniser.c filtering.c
 
 SIG_SRCS	=
 

@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:14:36 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/28 19:18:35 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:10:44 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@
 
 # include "libft.h"
 
-# define MALLOCED 1
+# define MALLOCED		1
+# define SINGLE_QUOTES	2
+# define DOUBLE_QUOTES	3
 
 typedef enum e_type
 {
@@ -41,6 +43,7 @@ typedef struct s_token
 	char			*value;
 	t_type			type;
 	int				malloced;
+	int				quotes;
 	struct s_token	*previous;
 	struct s_token	*next;
 }	t_token;

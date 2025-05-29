@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:02:30 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/28 23:05:46 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:18:23 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	is_it_builtin(t_token *temp)
 	if (!ft_strcmp(temp->value, "echo"))
 	{
 		if (temp->next)
-			ft_echo(temp->next);
+		{
+			if (!ft_echo(temp->next))
+				return (0);
+		}	
 		else
 			printf("\n");
 		return (1);

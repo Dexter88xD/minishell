@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:26:10 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/07 16:46:26 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:33:52 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 #include "parser.h"
 #include "utils.h"
 
+void	ft_setting_types(t_token *input)
+{
+	while (input)
+	{
+		if (is_operator(input->value))
+			input->type = OPERATOR;
+		else if (!input->previous || (input->previous
+				&& ft_strcmp(input->previous->value, "|") == 0))
+			input->type = CMD;
+		else
+			input->type = ARG;
+		input = input->next;
+	}
+}
 /*improved the logic of the function*/
 /*joins nodes with no spaces in between and remove the nodes of spaces*/
 /*keeps redirections >*/
