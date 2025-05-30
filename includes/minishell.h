@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:14:36 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/29 15:10:44 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:19:11 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_token
 	t_type			type;
 	int				malloced;
 	int				quotes;
+	char			**env;
 	struct s_token	*previous;
 	struct s_token	*next;
 }	t_token;

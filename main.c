@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/05/30 00:22:20 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:31:18 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ const char	*token_type_to_str(t_type type)
 	return (names[type]);
 }
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
 	char	*ret;
 	t_token	*input;
@@ -35,22 +35,24 @@ int	main(void)
 	while (1)
 	{
 		ret = readline("minishell$ ");
-		if (!ret)
-		{
-			if (input)
-				ft_del_lst(input);
-			exit(1);
-		}
 		if (input)
 			ft_del_lst(input);
+		if (!ret)
+			exit(1);
 		add_history(ret);
 		input = parsing(ret);
 		if (!input)
+		{
+			free(ret);
 			continue ;
+		}
+		input->env = env;
 		excution(input);
 		free(ret);
 	}
 	return (0);
+	(void)ac;
+	(void)av;
 }
 
 // temp = input;

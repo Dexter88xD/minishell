@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:02:30 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/29 15:18:23 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:26:00 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	is_it_builtin(t_token *temp)
 			printf("\n");
 		return (1);
 	}
+	else if (!ft_strcmp(temp->value, "env"))
+		return (ft_env(temp), 1);
 	else if (!ft_strcmp(temp->value, "cd"))
 		return (printf("this is cd!\n"), 1);
-	else if (!ft_strcmp(temp->value, "env"))
-		return (printf("this is env!\n"), 1);
 	else if (!ft_strcmp(temp->value, "exit"))
 		return (printf("this is exit!\n"), 1);
 	else if (!ft_strcmp(temp->value, "export"))
