@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:14:36 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/30 16:19:11 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:53:22 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
+# include <errno.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>

@@ -6,12 +6,27 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:45:11 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/28 19:19:00 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:02:29 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "utils.h"
+
+int	ft_size_lst(t_token *lst)
+{
+	int		size;
+	t_token	*current;
+
+	current = lst;
+	size = 0;
+	while (current != NULL)
+	{
+		size++;
+		current = (*current).next;
+	}
+	return (size);
+}
 
 t_token	*ft_new_node(void *content, int malloced)
 {
