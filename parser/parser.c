@@ -90,8 +90,111 @@ int	ft_closed_quotes(t_token *input)
 		return (0);
 	return (1);
 }
+int is_equale(char a, char b)
+{
+	return(a - b);
+}
 
-t_token	*parsing(char *ret)
+int ft_size_until(char *input)
+{
+	int i;
+
+	i = 0;
+	while(input[i] && ft_isalnum(input[i]))
+		i++;
+	return (i);
+}
+
+void ft_set_sq(t_token *input)
+{
+	int	i;
+	int check = 0;
+
+	i = 0;
+	while(input)
+	{
+		i = 0;
+		while(input->value[i])
+		{
+			if(input->quotes != -1 && input->value[i] == '\"')
+				check = 1;
+			if(input->value[i] == '\'' && check == 0)
+			{
+				input->quotes = -1;
+				break;
+			}
+			i++;
+		}
+		input = input->next;
+	}
+}
+
+void	ft_expand_var(t_token *input)
+{
+	int i = 0;
+	int j = 0;
+	int d = 0;
+	int check = 0;
+	int save = 0;
+	char *sec;
+	char *buffer;
+	ft_set_sq(input);
+	char **env = input->env;
+	while(input)
+	{
+		i = 0;
+		if((input->type == CMD || input->type == ARG) && input->quotes != -1)
+		{
+			while(input->value[i])
+			{
+				d = 0;
+				check = 0;
+				if(input->value[i] == '$')
+				{
+					while(env[d])
+					{
+						j = 0;
+						while(is_equale(input->value[i + j + 1], env[d][j]) == 0)
+						{
+							j++;
+							if(env[d][j] == '=' && ft_isalnum(input->value[i + j + 1]) == 0)
+							{
+								check = 1;
+								break;
+							}
+						}
+						if(check == 1)
+							break;
+						d++;
+						if(j != 0)
+						{
+							save = j;
+						}
+					}
+					if(check == 1)
+					{
+						sec = ft_strndup(input->value, i);
+						buffer = ft_strjoin(env[d] + j + 1, (input->value) + i + j + 1);
+						sec = ft_strjoin(sec , buffer);
+						input->value = sec;
+						i = i + ft_strlen(env[d] + j) - 1;
+					}
+					else
+					{
+						char *a = ft_strndup(input->value ,i);
+						char *b = input->value + i + ft_size_until(input->value + i + 1) + 1;
+						input->value = ft_strjoin(a , b);
+						i = i + save + ft_size_until(buffer + save + i) - 1;
+					}
+				}
+				else
+					i++;
+			}
+		}
+		input = input->next;
+	}
+}
+t_token	*parsing(char *ret, char **env)
 {
 	t_token	*input;
 	t_token	*temp;
@@ -100,7 +203,10 @@ t_token	*parsing(char *ret)
 	input = NULL;
 	temp = NULL;
 	input = ft_edit_input(ret);
+	input->env = env;
 	ft_filtering_spaces(input);
+	ft_setting_types(input);
+	ft_expand_var(input);
 	temp = input;
 	while (temp)
 	{
@@ -113,6 +219,5 @@ t_token	*parsing(char *ret)
 		temp->value = buffer;
 		temp = temp->next;
 	}
-	ft_setting_types(input);
 	return (input);
 }

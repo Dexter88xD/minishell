@@ -29,6 +29,7 @@ const char	*token_type_to_str(t_type type)
 int	main(int ac, char **av, char **env)
 {
 	char	*ret;
+	t_token *temp;
 	t_token	*input;
 
 	input = NULL;
@@ -40,13 +41,21 @@ int	main(int ac, char **av, char **env)
 		if (!ret)
 			exit(1);
 		add_history(ret);
-		input = parsing(ret);
+		input = parsing(ret, env);
 		if (!input)
 		{
 			free(ret);
 			continue ;
 		}
-		input->env = env;
+		temp = input;
+		while (temp)
+		{
+			printf("\n");
+			printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
+			token_type_to_str(temp->type));
+			temp = temp->next;
+		}
+		//input->env = env;
 		excution(input);
 		free(ret);
 	}

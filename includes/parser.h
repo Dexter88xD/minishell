@@ -35,6 +35,6 @@ void	ft_setting_types(t_token *input);
 void	ft_filtering_spaces(t_token *temp);
 
 t_token	*ft_edit_input(char *input);
-t_token	*parsing(char *ret);
+t_token	*parsing(char *ret, char **env);
 
 #endif

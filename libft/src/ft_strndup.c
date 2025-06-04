@@ -19,8 +19,8 @@ char	*ft_strndup(const char *s, size_t len)
 
 	if (s == NULL)
 		return (NULL);
-	if (len == 0)
-		len = ft_strlen(s);
+	// if (len == 0)
+	// 	len = ft_strlen(s);
 	buffer = (char *)malloc((len + 1) * sizeof(*s));
 	if (buffer == NULL)
 		return (NULL);
