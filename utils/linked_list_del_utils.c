@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:45:11 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/28 19:23:29 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:23:03 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,33 @@ void	ft_del_lst(t_token *node)
 	while (node)
 	{
 		temp = node->next;
-		free(node->value);
+		if (node->value)
+			free(node->value);
 		free(node);
 		node = temp;
 	}
 }
 
-void	ft_del_node(t_token *node)
+void	ft_del_node(t_token **node)
 {
 	if (!node)
 		return ;
-	if (node->next && node->previous)
+	if ((*node)->next && (*node)->previous)
 	{
-		node->previous->next = node->next;
-		node->next->previous = node->previous;
+		(*node)->previous->next = (*node)->next;
+		(*node)->next->previous = (*node)->previous;
 	}
 	else
 	{
-		if (!node->next && node->previous)
-			node->previous->next = NULL;
-		if (!node->previous && node->next)
-			node->next->previous = NULL;
+		if (!(*node)->next && (*node)->previous)
+			(*node)->previous->next = NULL;
+		if (!(*node)->previous && (*node)->next)
+		{
+			(*node)->next->previous = NULL;
+			(*node) = (*node)->next;
+		}
 	}
-	if (node->malloced)
-		free(node->value);
-	free(node);
+	if ((*node)->malloced)
+		free((*node)->value);
+	free((*node));
 }

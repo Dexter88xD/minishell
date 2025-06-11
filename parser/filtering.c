@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 20:35:30 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/29 21:56:14 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:41:44 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_filtering_spaces(t_token *input)
 		next = input->next;
 		if (next && ft_strcmp(next->value, " ") == 0)
 		{
-			ft_del_node(next);
+			ft_del_node(&next);
 			input = input->next;
 			continue ;
 		}
@@ -34,7 +34,7 @@ void	ft_filtering_spaces(t_token *input)
 			joined = ft_strjoin(input->value, next->value);
 			free(input->value);
 			input->value = joined;
-			ft_del_node(next);
+			ft_del_node(&next);
 			continue ;
 		}
 		input = input->next;

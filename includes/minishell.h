@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:14:36 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/01 16:53:22 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:17:35 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 # include "libft.h"
 
+# define NOT_MALLOCED	0
 # define MALLOCED		1
 # define SINGLE_QUOTES	2
 # define DOUBLE_QUOTES	3

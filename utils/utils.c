@@ -6,11 +6,18 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 00:43:06 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/01 17:15:34 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:09:31 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+const char	*token_type_to_str(t_type type)
+{
+	static const char	*names[] = {"UNKNOWN", "CMD", "ARG", "OPERATOR"};
+
+	return (names[type]);
+}
 
 int	check_if_integer(char *input)
 {

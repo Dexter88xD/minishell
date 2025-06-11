@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/05/30 17:48:04 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:28:05 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,9 @@
 #include "signals.h"
 #include "utils.h"
 
-const char	*token_type_to_str(t_type type)
-{
-	static const char	*names[] = {"UNKNOWN", "CMD", "ARG", "OPERATOR"};
-
-	return (names[type]);
-}
-
 int	main(int ac, char **av, char **env)
 {
 	char	*ret;
-	t_token *temp;
 	t_token	*input;
 
 	input = NULL;
@@ -47,15 +39,6 @@ int	main(int ac, char **av, char **env)
 			free(ret);
 			continue ;
 		}
-		temp = input;
-		while (temp)
-		{
-			printf("\n");
-			printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
-			token_type_to_str(temp->type));
-			temp = temp->next;
-		}
-		//input->env = env;
 		excution(input);
 		free(ret);
 	}
@@ -63,12 +46,13 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 }
+	// t_token	*temp;
 
-// temp = input;
-// while (temp)
-// {
-// 	printf("\n");
-// 	printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
-// 		token_type_to_str(temp->type));
-// 	temp = temp->next;
-// }
+	// temp = input;
+		// while (temp)
+		// {
+		// 	printf("\n");
+		// 	printf("node : ~%s~\nwith type: %s\n", (char *)temp->value,
+		// 		token_type_to_str(temp->type));
+		// 	temp = temp->next;
+		// }

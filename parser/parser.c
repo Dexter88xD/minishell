@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:18:53 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/30 00:45:03 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:27:23 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_token	*ft_edit_input(char *input)
 			ft_edit_input_two(input, &edited_input, &i, &j);
 		if ((is_space == 1 || in_end == 1) && i != 0)
 			if (ft_last_node(edited_input)->value[0] != ' ')
-				ft_add_node_back(&edited_input, ft_new_node(" ", 0));
+				ft_add_node_back(&edited_input, ft_new_node(" ", NOT_MALLOCED));
 		i += j;
 		if (i >= (int)ft_strlen(input))
 			break ;
@@ -98,8 +98,9 @@ t_token	*parsing(char *ret, char **env)
 	char	*buffer;
 
 	input = NULL;
-	temp = NULL;
 	input = ft_edit_input(ret);
+	if (!input)
+		return (input);
 	input->env = env;
 	ft_filtering_spaces(input);
 	ft_setting_types(input);
