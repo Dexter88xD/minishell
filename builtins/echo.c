@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:42:37 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/10 17:09:24 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:12:50 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_skip_echo_option(t_token **argument)
 
 	no_newline = 0;
 	i = 0;
-	if ((*argument)->value[i] == '-')
+	while ((*argument)->value[i] == '-')
 	{
 		i++;
 		while ((*argument)->value[i] && (*argument)->value[i] == 'n')
@@ -31,6 +31,7 @@ int	ft_skip_echo_option(t_token **argument)
 		{
 			no_newline = 1;
 			(*argument) = (*argument)->next;
+			i = 0;
 		}
 	}
 	return (no_newline);

@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/06/11 18:28:05 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:06:25 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	main(int ac, char **av, char **env)
 		excution(input);
 		free(ret);
 	}
-	return (0);
 	(void)ac;
 	(void)av;
+	return (0);
 }
 	// t_token	*temp;
 

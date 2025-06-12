@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:16:27 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/30 00:45:10 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:42:56 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int		ft_closed_quotes(t_token *input);
 
 int		ft_find_end(char *input, int *is_space, int *in_end);
 
-void	ft_setting_types(t_token *input);
+void	ft_setting_types(t_token *input, char **env);
 void	ft_filtering_spaces(t_token *temp);
 
 t_token	*ft_edit_input(char *input);
-void	ft_expand_var(t_token *input, char **env);
 t_token	*parsing(char *ret, char **env);
+void	ft_expand_var(t_token *input);
 
 #endif

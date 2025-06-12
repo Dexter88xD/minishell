@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:26:10 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/05/29 20:33:52 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:47:53 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 #include "parser.h"
 #include "utils.h"
 
-void	ft_setting_types(t_token *input)
+void	ft_setting_types(t_token *input, char **env)
 {
+	int	i;
+
+	i = 0;
 	while (input)
 	{
+		input->env = env;
 		if (is_operator(input->value))
 			input->type = OPERATOR;
 		else if (!input->previous || (input->previous

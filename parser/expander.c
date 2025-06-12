@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:07:42 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/10 13:37:56 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:44:08 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_make_it(t_token *input, int *i, int check, int save, int j, int d)
 	}
 }
 
-void	ft_half_work(t_token *input, char **env)
+void	ft_half_work(t_token *input)
 {
 	int	i;
 	int	j;
@@ -119,7 +119,6 @@ void	ft_half_work(t_token *input, char **env)
 	d = 0;
 	check = 0;
 	save = 0;
-	input->env = env;
 	while (input->value[i])
 	{
 		d = 0;
@@ -134,13 +133,13 @@ void	ft_half_work(t_token *input, char **env)
 	}
 }
 
-void	ft_expand_var(t_token *input, char **env)
+void	ft_expand_var(t_token *input)
 {
 	ft_set_sq(input);
 	while (input)
 	{
 		if (check_for_expand(input))
-			ft_half_work(input, env);
+			ft_half_work(input);
 		input = input->next;
 	}
 }

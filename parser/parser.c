@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:18:53 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/11 18:27:23 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:48:35 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,12 @@ t_token	*parsing(char *ret, char **env)
 	t_token	*temp;
 	char	*buffer;
 
-	input = NULL;
 	input = ft_edit_input(ret);
 	if (!input)
 		return (input);
-	input->env = env;
 	ft_filtering_spaces(input);
-	ft_setting_types(input);
-	ft_expand_var(input, env);
+	ft_setting_types(input, env);
+	ft_expand_var(input);
 	temp = input;
 	while (temp)
 	{
