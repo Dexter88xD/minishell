@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:02:30 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/11 18:25:56 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:43:15 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "executor.h"
 #include "minishell.h"
 
-int	is_it_builtin(t_token *temp)
+int	ft_is_builtin(t_token *temp)
 {
 	if (!ft_strcmp(temp->value, "echo"))
 	{
@@ -42,9 +42,9 @@ int	is_it_builtin(t_token *temp)
 	return (0);
 }
 
-int	excution(t_token *input)
+int	ft_excution(t_token *input)
 {
-	if (is_it_builtin(input))
+	if (ft_is_builtin(input))
 		return (1);
 	else
 		printf("to be done!\n");

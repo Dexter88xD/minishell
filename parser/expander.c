@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:07:42 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/12 16:44:08 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/14 22:23:40 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,130 +16,134 @@
 #include "parser.h"
 #include "utils.h"
 
-int	ft_size_until(char *input)
+int	ft_var_name_length(char *token)
 {
-	int	i;
+	int	index;
 
-	i = 0;
-	while (input[i] && ft_isalnum(input[i]))
-		i++;
-	return (i);
+	index = 0;
+	while (token[index] && ft_isalnum(token[index]))
+		index++;
+	return (index);
 }
 
-void	ft_set_sq(t_token *input)
+void	ft_detect_quote_type(t_token *token)
 {
 	int	i;
-	int	check;
+	int	double_quote_found;
 
-	check = 0;
-	i = 0;
-	while (input)
+	double_quote_found = 0;
+	while (token)
 	{
 		i = 0;
-		while (input->value[i])
+		while (token->value[i])
 		{
-			if (input->value && input->quotes != -1 && input->value[i] == '\"')
-				check = 1;
-			if (input->value[i] == '\'' && check == 0)
+			if (token->value && token->quotes != -1 && token->value[i] == '\"')
+				double_quote_found = 1;
+			if (token->value[i] == '\'' && double_quote_found == 0)
 			{
-				input->quotes = -1;
+				token->quotes = -1;
 				break ;
 			}
 			i++;
-			if (input->value[i] == '\0')
-				input->quotes = 0;
+			if (token->value[i] == '\0')
+				token->quotes = 0;
 		}
-		input = input->next;
+		token = token->next;
 	}
 }
 
-int	check_for_expand(t_token *input)
+int	ft_should_expand(t_token *token)
 {
-	if ((input->type == CMD || input->type == ARG) && input->quotes != -1)
+	if ((token->type == CMD || token->type == ARG) && token->quotes != -1)
 		return (1);
 	return (0);
 }
 
-void	find_path(t_token *input, int *i, int *d, int *check, int *save, int *j)
+void	ft_find_env_match(t_token *token, int *val_index, int *env_index,
+		int *found_match, int *last_valid_match_len, int *match_index)
 {
-	while (input->env[*d])
+	while (token->env[*env_index])
 	{
-		*j = 0;
-		while (input->value[*i + *j + 1] - input->env[*d][*j] == 0)
+		*match_index = 0;
+		while (token->value[*val_index + *match_index + 1] - token->env[*env_index][*match_index] == 0)
 		{
-			(*j)++;
-			if (input->env[*d][*j] == '=' && ft_isalnum(input->value[*i + *j
-					+ 1]) == 0)
+			(*match_index)++;
+			if (token->env[*env_index][*match_index] == '=' && ft_isalnum(token->value[*val_index + *match_index + 1]) == 0)
 			{
-				*check = 1;
+				*found_match = 1;
 				break ;
 			}
 		}
-		if (*check == 1)
+		if (*found_match == 1)
 			break ;
-		(*d)++;
-		if (*j != 0)
-			*save = *j;
+		(*env_index)++;
+		if (*match_index != 0)
+			*last_valid_match_len = *match_index;
 	}
 }
 
-void	ft_make_it(t_token *input, int *i, int check, int save, int j, int d)
+void	ft_expand_token_value(t_token *token, int *val_index, int found_match,
+		int last_valid_match_len, int match_index, int env_index)
 {
-	char	*a;
-	char	*b;
+	char	*prefix;
+	char	*suffix;
 
-	if (check == 1)
+	if (found_match == 1)
 	{
-		a = ft_strndup(input->value, *i);
-		b = ft_strjoin(input->env[d] + j + 1, (input->value) + *i + j + 1);
-		input->value = ft_strjoin(a, b);
-		free(a), free(b);
-		*i = *i + ft_strlen(input->env[d] + j) - 1;
+		prefix = ft_strndup(token->value, *val_index);
+		suffix = ft_strjoin(token->env[env_index] + match_index + 1, (token->value) + *val_index + match_index + 1);
+		token->value = ft_strjoin(prefix, suffix);
+		if (prefix)
+			free(prefix);
+		if (suffix)
+			free(suffix);
+		*val_index = *val_index + ft_strlen(token->env[env_index] + match_index) - 1;
 	}
 	else
 	{
-		a = ft_strndup(input->value, *i);
-		b = input->value + *i + ft_size_until(input->value + *i + 1) + 1;
-		input->value = ft_strjoin(a, b);
-		free(a), free(b);
-		*i = *i + save + ft_size_until(b + save + *i) - 1;
+		prefix = ft_strndup(token->value, *val_index);
+		suffix = token->value + *val_index + ft_var_name_length(token->value + *val_index + 1) + 1;
+		token->value = ft_strjoin(prefix, suffix);
+		if (prefix)
+			free(prefix);
+		*val_index = *val_index + last_valid_match_len + ft_var_name_length(suffix + last_valid_match_len + *val_index) - 1;
 	}
 }
 
-void	ft_half_work(t_token *input)
+void	ft_expand_token_string(t_token *token)
 {
-	int	i;
-	int	j;
-	int	d;
-	int	check;
-	int	save;
+	int	val_index;
+	int	match_index;
+	int	env_index;
+	int	found_match;
+	int	last_valid_match_len;
 
-	i = 0;
-	j = 0;
-	d = 0;
-	check = 0;
-	save = 0;
-	while (input->value[i])
+	val_index = 0;
+	match_index = 0;
+	last_valid_match_len = 0;
+	while (token->value[val_index])
 	{
-		d = 0;
-		check = 0;
-		if (input->value[i] == '$')
+		env_index = 0;
+		found_match = 0;
+		if (token->value[val_index] == '$')
 		{
-			find_path(input, &i, &d, &check, &save, &j);
-			ft_make_it(input, &i, check, save, j, d);
+			ft_find_env_match(token, &val_index, &env_index, &found_match, &last_valid_match_len, &match_index);
+			ft_expand_token_value(token, &val_index, found_match, last_valid_match_len, match_index, env_index);
 		}
 		else
-			i++;
+			val_index++;
+		if (val_index < 0)
+			val_index = 0;
 	}
 }
 
-void	ft_expand_var(t_token *input)
+void	ft_expand_all_tokens(t_token *token_list)
 {
-	ft_set_sq(input);
-	while (input)
+	ft_detect_quote_type(token_list);
+	while (token_list)
 	{
-		if (check_for_expand(input))
-			ft_half_work(input);
-		input = input->next;
+		if (ft_should_expand(token_list))
+			ft_expand_token_string(token_list);
+		token_list = token_list->next;
 	}
 }

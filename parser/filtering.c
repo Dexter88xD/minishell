@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 20:35:30 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/10 13:41:44 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:46:39 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_filtering_spaces(t_token *input)
 			input = input->next;
 			continue ;
 		}
-		if (next && !is_operator(input->value) && !is_operator(next->value))
+		if (next && !ft_operator(input->value) && !ft_operator(next->value))
 		{
 			joined = ft_strjoin(input->value, next->value);
 			free(input->value);
@@ -41,7 +41,7 @@ void	ft_filtering_spaces(t_token *input)
 	}
 }
 
-void	double_quotes(t_token *argument, char *outcome, int *i, int *index)
+void	ft_double_quotes(t_token *argument, char *outcome, int *i, int *index)
 {
 	argument->quotes = DOUBLE_QUOTES;
 	(*i)++;
@@ -55,7 +55,7 @@ void	double_quotes(t_token *argument, char *outcome, int *i, int *index)
 		(*i)++;
 }
 
-void	single_quotes(t_token *argument, char *outcome, int *i, int *index)
+void	ft_single_quotes(t_token *argument, char *outcome, int *i, int *index)
 {
 	argument->quotes = SINGLE_QUOTES;
 	(*i)++;
@@ -83,9 +83,9 @@ char	*ft_filter_quotes(t_token *argument)
 	while (argument->value[i])
 	{
 		if (argument->value[i] == '"')
-			double_quotes(argument, outcome, &i, &index);
+			ft_double_quotes(argument, outcome, &i, &index);
 		else if (argument->value[i] == '\'')
-			single_quotes(argument, outcome, &i, &index);
+			ft_single_quotes(argument, outcome, &i, &index);
 		else
 		{
 			outcome[index] = argument->value[i];

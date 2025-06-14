@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:26:10 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/12 16:47:53 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:47:27 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_setting_types(t_token *input, char **env)
 	while (input)
 	{
 		input->env = env;
-		if (is_operator(input->value))
+		if (ft_operator(input->value))
 			input->type = OPERATOR;
 		else if (!input->previous || (input->previous
 				&& ft_strcmp(input->previous->value, "|") == 0))
@@ -36,7 +36,7 @@ void	ft_setting_types(t_token *input, char **env)
 /*joins nodes with no spaces in between and remove the nodes of spaces*/
 /*keeps redirections >*/
 
-void	is_end(char *delimiter, char *input, int *in_end, int *i)
+void	ft_is_end(char *delimiter, char *input, int *in_end, int *i)
 {
 	while (input[*i])
 	{
@@ -83,6 +83,6 @@ int	ft_find_end(char *input, int *is_space, int *in_end)
 			i++;
 	}
 	else
-		is_end(delimiter, input, in_end, &i);
+		ft_is_end(delimiter, input, in_end, &i);
 	return (i);
 }

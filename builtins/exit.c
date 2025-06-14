@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:43:44 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/01 17:18:18 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:38:23 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_exit(t_token *argument)
 	temp = argument->next;
 	if (temp)
 	{
-		if (!check_if_integer(temp->value))
+		if (!ft_check_integer(temp->value))
 		{
 			printf("bash: exit: %s: numeric argument required\n", temp->value);
 			ft_del_lst(argument);

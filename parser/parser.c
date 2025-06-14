@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:18:53 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/12 16:48:35 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:55:38 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 #include "minishell.h"
 #include "parser.h"
 #include "utils.h"
+
+void	ft_initialise_nodes(t_token *list)
+{
+	if (!list)
+		return ;
+	while (list)
+	{
+		list->quotes = 0;
+		list->type = 0;
+		list = list->next;
+	}
+}
 
 void	ft_edit_input_two(char *input, t_token **edited_input, int *i, int *j)
 {
@@ -59,6 +71,7 @@ t_token	*ft_edit_input(char *input)
 		if (i >= (int)ft_strlen(input))
 			break ;
 	}
+	ft_initialise_nodes(edited_input);
 	return (edited_input);
 }
 
@@ -91,7 +104,7 @@ int	ft_closed_quotes(t_token *input)
 	return (1);
 }
 
-t_token	*parsing(char *ret, char **env)
+t_token	*ft_parsing(char *ret, char **env)
 {
 	t_token	*input;
 	t_token	*temp;
@@ -102,7 +115,7 @@ t_token	*parsing(char *ret, char **env)
 		return (input);
 	ft_filtering_spaces(input);
 	ft_setting_types(input, env);
-	ft_expand_var(input);
+	ft_expand_all_tokens(input);
 	temp = input;
 	while (temp)
 	{

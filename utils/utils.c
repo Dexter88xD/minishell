@@ -6,20 +6,20 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 00:43:06 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/10 13:09:31 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:47:01 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-const char	*token_type_to_str(t_type type)
+const char	*ft_token_type_str(t_type type)
 {
 	static const char	*names[] = {"UNKNOWN", "CMD", "ARG", "OPERATOR"};
 
 	return (names[type]);
 }
 
-int	check_if_integer(char *input)
+int	ft_check_integer(char *input)
 {
 	int	i;
 
@@ -44,7 +44,7 @@ int	ft_isspace(int c)
 	return (0);
 }
 
-int	is_operator(char *str)
+int	ft_operator(char *str)
 {
 	return (
 		!ft_strcmp(str, "|")
