@@ -75,7 +75,7 @@ PARSR_SRCS	= parser.c tokeniser.c filtering.c expander.c
 
 SIG_SRCS	=
 
-UTILS_SRCS	= linked_list_utils.c linked_list_del_utils.c utils.c
+UTILS_SRCS	= linked_list_utils.c linked_list_del_utils.c expander_utils.c utils.c
 
 SRCS		= main.c \
 			$(addprefix $(BLT_DIR)/, $(BLT_SRCS))\

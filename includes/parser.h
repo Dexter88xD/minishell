@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:16:27 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/14 21:55:10 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/15 03:30:14 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ typedef struct s_quotes
 	int	is_single_quote;
 	int	is_double_quote;
 }		t_quotes;
+
+typedef struct s_index
+{
+	int	val;
+	int	match;
+	int	env;
+	int	found_match;
+	int	last_match_len;
+}		t_index;
 
 void	ft_double_quotes(t_token *argument, char *outcome, int *i, int *index);
 void	ft_single_quotes(t_token *argument, char *outcome, int *i, int *index);
@@ -39,5 +48,9 @@ t_token	*ft_edit_input(char *input);
 t_token	*ft_parsing(char *ret, char **env);
 
 void	ft_expand_all_tokens(t_token *input);
+void	ft_expand_token_string(t_token *token);
+void	ft_expand_token_value(t_token *token, t_index *index);
+void	ft_expand_without_match(t_token *token, t_index *index);
+void	ft_expand_with_match(t_token *token, t_index *index);
 
 #endif

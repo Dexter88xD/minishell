@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 20:35:30 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/14 21:46:39 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/14 23:30:22 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*ft_filter_quotes(t_token *argument)
 
 	i = 0;
 	index = 0;
-	outcome = malloc(ft_strlen(argument->value) * sizeof(argument->value));
+	outcome = malloc(ft_strlen(argument->value) * sizeof(argument->value) + 1);
 	if (!outcome)
 		return (NULL);
 	while (argument->value[i])
