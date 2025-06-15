@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/06/14 21:37:49 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/15 04:45:39 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include "parser.h"
 #include "signals.h"
 #include "utils.h"
+
+//need to handle errors of invalid read size in case of echo $HOMEasdf
+//and so on.
 
 int	main(int ac, char **av, char **env)
 {
