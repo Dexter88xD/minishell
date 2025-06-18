@@ -16,9 +16,6 @@
 
 void	ft_setting_types(t_token *input, char **env)
 {
-	int	i;
-
-	i = 0;
 	while (input)
 	{
 		input->env = env;

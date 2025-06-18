@@ -42,11 +42,13 @@ void	ft_expand_without_match(t_token *token, t_index *index)
 
 	prefix = ft_strndup(token->value, index->val);
 	name_len = ft_var_name_length(token->value + index->val + 1);
-	suffix = token->value + index->val + name_len + 1;
+	suffix = ft_strdup(token->value + index->val + name_len + 1);
 	free(token->value);
 	token->value = ft_strjoin(prefix, suffix);
 	if (prefix)
 		free(prefix);
+	if (suffix)
+		free(suffix);
 	index->val += index->last_match_len + ft_var_name_length(suffix
 			+ index->last_match_len + index->val) - 1;
 }
