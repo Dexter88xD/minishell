@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 03:10:14 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/15 03:23:06 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:22:30 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ void	ft_find_env_match(t_token *token, t_index *index)
 		{
 			index->match++;
 			if (token->env[index->env][index->match] == '='
-				&& ft_isalnum(token->value[index->val + index->match + 1]) == 0)
+				&& !ft_isalnum(token->value[index->val + index->match + 1]))
 			{
 				index->found_match = 1;
 				break ;
 			}
+			if (index->val + index->match + 1 > (int)ft_strlen(token->value))
+				break ;
 		}
 		if (index->found_match == 1)
 			break ;

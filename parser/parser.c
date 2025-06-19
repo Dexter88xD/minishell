@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:18:53 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/14 21:55:38 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/18 16:34:46 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ int	ft_closed_quotes(t_token *input)
 	return (1);
 }
 
+// In the case of $OLD_PWD the variable expanded is just "OLD",
+// while leaving "_PWD" to be interpreted as normal text
+// Case in question: ## echo $LS_COLORS$LS_COLORS-FDSJKFHSC$OLD_PWD ##
 t_token	*ft_parsing(char *ret, char **env)
 {
 	t_token	*input;
