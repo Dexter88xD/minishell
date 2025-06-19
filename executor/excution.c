@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:02:30 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/14 21:43:15 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:46:06 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 #include "executor.h"
 #include "minishell.h"
 
-int	ft_is_builtin(t_token *temp)
+int	ft_is_builtin(t_token *token)
 {
-	if (!ft_strcmp(temp->value, "echo"))
+	if (!ft_strcmp(token->value, "echo"))
 	{
-		if (temp->next)
+		if (token->next)
 		{
-			if (!ft_echo(temp->next))
+			if (!ft_echo(token->next))
 				return (0);
 		}	
 		else
 			printf("\n");
 		return (1);
 	}
-	if (!ft_strcmp(temp->value, "env"))
-		return (ft_env(temp), 1);
-	if (!ft_strcmp(temp->value, "exit"))
-		return (ft_exit(temp), 1);
-	if (!ft_strcmp(temp->value, "cd"))
+	if (!ft_strcmp(token->value, "env"))
+		return (ft_env(token), 1);
+	if (!ft_strcmp(token->value, "exit"))
+		return (ft_exit(token), 1);
+	if (!ft_strcmp(token->value, "pwd"))
+		return (ft_pwd(token), 1);
+	if (!ft_strcmp(token->value, "cd"))
 		return (printf("this is cd!\n"), 1);
-	if (!ft_strcmp(temp->value, "export"))
+	if (!ft_strcmp(token->value, "export"))
 		return (printf("this is export!\n"), 1);
-	if (!ft_strcmp(temp->value, "pwd"))
-		return (printf("this is pwd!\n"), 1);
-	if (!ft_strcmp(temp->value, "unset"))
+	if (!ft_strcmp(token->value, "unset"))
 		return (printf("this is unset!\n"), 1);
 	return (0);
 }
