@@ -1,0 +1,14 @@
+Makefile
+builtins
+env
+executor
+includes
+infile
+libft
+main.c
+minishell
+obj
+parser
+readline.supp
+signals
+utils
