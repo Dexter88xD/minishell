@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:16:45 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/20 00:51:27 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:42:47 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 const char	*ft_token_type_str(t_type type);
 
 int			ft_isspace(int c);
-int			ft_operator(char *str);
+int			ft_operator(t_token *token);
 int			ft_check_integer(char *input);
 
 /***************LINKED LIST UTILS***************/

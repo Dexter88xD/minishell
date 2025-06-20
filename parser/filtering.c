@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 20:35:30 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/14 23:30:22 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:48:16 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_filtering_spaces(t_token *input)
 			input = input->next;
 			continue ;
 		}
-		if (next && !ft_operator(input->value) && !ft_operator(next->value))
+		if (next && !ft_operator(input) && !ft_operator(next))
 		{
 			joined = ft_strjoin(input->value, next->value);
 			free(input->value);

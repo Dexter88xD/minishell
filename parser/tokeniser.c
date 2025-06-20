@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:26:10 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/14 21:47:27 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:43:33 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@
 
 void	ft_setting_types(t_token *input, char **env)
 {
+	int	type;
+
 	while (input)
 	{
 		input->env = env;
-		if (ft_operator(input->value))
-			input->type = OPERATOR;
+		
+		type = ft_operator(input);
+		if (type)
+			input->type = type;
 		else if (!input->previous || (input->previous
 				&& ft_strcmp(input->previous->value, "|") == 0))
 			input->type = CMD;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 16:49:06 by kakbour           #+#    #+#             */
-/*   Updated: 2025/06/20 16:50:13 by kakbour          ###   ########.fr       */
+/*   Updated: 2025/06/20 17:46:20 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,10 @@ void	ft_open_files(t_token *input)
 {
 	while(input)
 	{
-		if(input->type == OPERATOR)
-		{
-			if (!ft_strcmp(input->value, "<"))
-				ft_stdin_redirect(input);
-			else if (!ft_strcmp(input->value, ">"))
-				ft_stdout_redirect(input);
-		}
+		if (input->type == INPUT_RED)
+			ft_stdin_redirect(input);
+		else if (input->type == OUTPUT_RED)
+			ft_stdout_redirect(input);
 		input = input->next;
 	}
 }

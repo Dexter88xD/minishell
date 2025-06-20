@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 00:43:06 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/14 21:47:01 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:48:34 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,33 @@ int	ft_isspace(int c)
 	return (0);
 }
 
-int	ft_operator(char *str)
+// int	ft_operator(char *str)
+// {
+// 	return (
+// 		!ft_strcmp(str, "|")
+// 		|| !ft_strcmp(str, "<")
+// 		|| !ft_strcmp(str, ">")
+// 		|| !ft_strcmp(str, "<<")
+// 		|| !ft_strcmp(str, ">>")
+// 		|| !ft_strcmp(str, "<>")
+// 		|| !ft_strcmp(str, "><")
+// 	);
+// }
+
+int	ft_operator(t_token *token)
 {
-	return (
-		!ft_strcmp(str, "|")
-		|| !ft_strcmp(str, "<")
-		|| !ft_strcmp(str, ">")
-		|| !ft_strcmp(str, "<<")
-		|| !ft_strcmp(str, ">>")
-		|| !ft_strcmp(str, "<>")
-		|| !ft_strcmp(str, "><")
-	);
+	if (!ft_strcmp(token->value, "|"))
+		return(PIPE);
+	else if (!ft_strcmp(token->value, "<"))
+		return (INPUT_RED);
+	else if (!ft_strcmp(token->value, ">"))
+		return (OUTPUT_RED);
+	else if (!ft_strcmp(token->value, "<<"))
+		return (HEREDOC);
+	else if (!ft_strcmp(token->value, ">>"))
+		return (APPEND_OUTPUT);
+	else if (!ft_strcmp(token->value, "<>"))
+		return (READ_WRITE);
+	else
+		return (0);
 }

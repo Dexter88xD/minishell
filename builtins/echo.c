@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:42:37 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/20 16:47:22 by kakbour          ###   ########.fr       */
+/*   Updated: 2025/06/20 17:49:35 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_echo(t_token *argument)
 	int	no_newline;
 
 	no_newline = ft_skip_echo_option(&argument);
-	while (argument && argument->type != OPERATOR)
+	while (argument && argument->type <= ARG)
 	{
 		printf("%s", argument->value);
 		if (argument->next)
