@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:07:42 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/15 03:29:47 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:18:49 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 #include "parser.h"
 #include "utils.h"
 
+int		ft_find_dollar(t_token *token)
+{
+	int	i;
+	
+	i = 0;
+	while(token->value[i] && token->value[i] != '$')
+		i++;
+	return (i);
+}
 void	ft_expand_with_match(t_token *token, t_index *index)
 {
 	char	*prefix;
@@ -31,9 +40,8 @@ void	ft_expand_with_match(t_token *token, t_index *index)
 		free(prefix);
 	if (suffix)
 		free(suffix);
-	index->val += ft_strlen(env_val) - 1;
+	index->val = ft_find_dollar(token) - 1;
 }
-
 void	ft_expand_without_match(t_token *token, t_index *index)
 {
 	char	*prefix;
@@ -49,8 +57,7 @@ void	ft_expand_without_match(t_token *token, t_index *index)
 		free(prefix);
 	if (suffix)
 		free(suffix);
-	index->val += index->last_match_len + ft_var_name_length(suffix
-			+ index->last_match_len + index->val) - 1;
+	index->val = ft_find_dollar(token) - 1;
 }
 
 void	ft_expand_token_value(t_token *token, t_index *index)
