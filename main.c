@@ -6,7 +6,7 @@
 /*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/06/20 16:50:43 by kakbour          ###   ########.fr       */
+/*   Updated: 2025/06/20 18:07:22 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,24 @@
 
 char *token_type_to_str(int type)
 {
-	char *a;
+	char *a = NULL;
 	
 	if (type == 1)
 		a = "cmd";
 	if (type == 2)
 		a = "arg";
 	if (type == 3)
-		a = "operator";
+		a = "pipe";
+	if (type == 4)
+		a = "INPUT_RED";
+	if (type == 5)
+		a = "OUTPUT_RED";
+	if (type == 6)
+		a = "HEREDOC";
+	if (type == 7)
+		a = "APPEND_OUTPUT";
+	if (type == 8)
+		a = "READ_WRITE";
 	return (a);
 }
 
@@ -55,15 +65,15 @@ int	main(int ac, char **av, char **env)
 			free(ret);
 			continue ;
 		}
-		// t_token	*temp;
+		t_token	*temp;
 
-		// temp = input;
-		// while (temp)
-		// {
-		// 	printf("\n");
-		// 	printf("node : ~%s~\nwith type: %s\n", (char *)temp->value, token_type_to_str(temp->type));
-		// 	temp = temp->next;
-		// }
+		temp = input;
+		while (temp)
+		{
+			printf("\n");
+			printf("node : ~%s~\nwith type: %s\n", (char *)temp->value, token_type_to_str(temp->type));
+			temp = temp->next;
+		}
 		int pid = fork();
 		if(pid == 0)
 		{	

@@ -6,7 +6,7 @@
 /*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:02:30 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/20 16:49:01 by kakbour          ###   ########.fr       */
+/*   Updated: 2025/06/20 18:11:04 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ int	ft_excution(t_token *input)
 	if (ft_is_builtin(input))
 		return (1);
 	else
-		printf("to be done!\n");
+		;
 	return (0);
 }

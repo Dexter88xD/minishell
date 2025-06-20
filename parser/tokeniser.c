@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokeniser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:26:10 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/20 17:43:33 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:34:35 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,25 @@
 #include "parser.h"
 #include "utils.h"
 
+int		is_cmd(t_token *input, int *check)
+{
+	if (!input->previous || (input->previous && *check == 0 && input->previous->type != OUTPUT_RED && input->previous->type != INPUT_RED))
+	{
+		*check = 1;
+		return (1);
+	}
+	else if (input->previous && ft_strcmp(input->previous->value, "|") == 0)
+	{
+		*check = 0;
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_setting_types(t_token *input, char **env)
 {
 	int	type;
+	int check = 0;
 
 	while (input)
 	{
@@ -25,8 +41,7 @@ void	ft_setting_types(t_token *input, char **env)
 		type = ft_operator(input);
 		if (type)
 			input->type = type;
-		else if (!input->previous || (input->previous
-				&& ft_strcmp(input->previous->value, "|") == 0))
+		else if(is_cmd(input, &check))
 			input->type = CMD;
 		else
 			input->type = ARG;
