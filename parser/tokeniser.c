@@ -6,7 +6,7 @@
 /*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:26:10 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/20 18:34:35 by kakbour          ###   ########.fr       */
+/*   Updated: 2025/06/20 22:40:45 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 #include "parser.h"
 #include "utils.h"
 
-int		is_cmd(t_token *input, int *check)
+int		is_cmd(t_token *input, int *check_1, int *check_2)
 {
-	if (!input->previous || (input->previous && *check == 0 && input->previous->type != OUTPUT_RED && input->previous->type != INPUT_RED))
+	if (input->previous && *(input->previous->value) == '|')
+		*check_2 = 0;
+	if (!input->previous || (input->previous && *check_1 == 0 && *check_2 == 0 && input->previous->type != OUTPUT_RED && input->previous->type != INPUT_RED))
 	{
-		*check = 1;
+		*check_1 = 1;
+		*check_2 = 0;
 		return (1);
 	}
-	else if (input->previous && ft_strcmp(input->previous->value, "|") == 0)
+	else if (input->previous && ft_strcmp(input->previous->value, "|") == 0 && *check_2 == 0)
 	{
-		*check = 0;
+		*check_1 = 0;
+		*check_2 = 1;
 		return (1);
 	}
 	return (0);
@@ -32,16 +36,15 @@ int		is_cmd(t_token *input, int *check)
 void	ft_setting_types(t_token *input, char **env)
 {
 	int	type;
-	int check = 0;
-
+	int check_1 = 0;
+	int check_2 = 0;
 	while (input)
 	{
 		input->env = env;
-		
 		type = ft_operator(input);
 		if (type)
 			input->type = type;
-		else if(is_cmd(input, &check))
+		else if(is_cmd(input, &check_1, &check_2))
 			input->type = CMD;
 		else
 			input->type = ARG;

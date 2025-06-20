@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 00:43:06 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/20 17:48:34 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 22:38:35 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ int	ft_operator(t_token *token)
 		return (APPEND_OUTPUT);
 	else if (!ft_strcmp(token->value, "<>"))
 		return (READ_WRITE);
-	else
-		return (0);
+	else if (token->previous && token->previous->type == INPUT_RED)
+		return (IN_FILE);
+	else if (token->previous && token->previous->type == OUTPUT_RED)
+		return (OUT_FILE);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:14:36 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/20 17:41:59 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 21:51:27 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ typedef enum e_type
 	OUTPUT_RED = 5,
 	HEREDOC = 6,
 	APPEND_OUTPUT = 7,
-	READ_WRITE = 8
+	READ_WRITE = 8,
+	IN_FILE = 9,
+	OUT_FILE = 10
 }	t_type;
 
 typedef struct s_token

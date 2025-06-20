@@ -6,7 +6,7 @@
 /*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:18:05 by kakbour           #+#    #+#             */
-/*   Updated: 2025/06/20 18:07:22 by kakbour          ###   ########.fr       */
+/*   Updated: 2025/06/20 21:59:55 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ char *token_type_to_str(int type)
 		a = "APPEND_OUTPUT";
 	if (type == 8)
 		a = "READ_WRITE";
+	if (type == 9)
+		a = "IN_FILE";
+	if (type == 10)
+		a = "OUT_FILE";
 	return (a);
 }
 
