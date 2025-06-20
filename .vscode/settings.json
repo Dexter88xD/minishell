@@ -59,6 +59,15 @@
   "files.associations": {
     "*.embeddedhtml": "html",
     "builtin.h": "c",
-    "parser.h": "c"
+    "parser.h": "c",
+    "env.h": "c",
+    "executor.h": "c",
+    "libft.h": "c",
+    "minishell.h": "c",
+    "signals.h": "c",
+    "history.h": "c",
+    "readline.h": "c",
+    "types.h": "c",
+    "utils.h": "c"
   }
 }

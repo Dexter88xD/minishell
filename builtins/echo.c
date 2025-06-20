@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:42:37 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/12 16:12:50 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:47:22 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_echo(t_token *argument)
 	{
 		printf("%s", argument->value);
 		if (argument->next)
-			printf(" ");
+			write(1, " ", 1);
 		argument = argument->next;
 	}
 	if (no_newline == 0)

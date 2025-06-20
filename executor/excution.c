@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excution.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:02:30 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/20 04:52:44 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:49:01 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_is_builtin(t_token *token)
 				return (0);
 		}	
 		else
-			printf("\n");
+			write(1, "\n", 1);
 		return (1);
 	}
 	if (!ft_strcmp(token->value, "env"))
@@ -43,7 +43,8 @@ int	ft_is_builtin(t_token *token)
 }
 
 int	ft_excution(t_token *input)
-{
+{	
+	ft_open_files(input);
 	if (ft_is_builtin(input))
 		return (1);
 	else

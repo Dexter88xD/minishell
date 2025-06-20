@@ -67,7 +67,7 @@ BLT_SRCS	= cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
 ENV_SRCS	=
 
-EXEC_SRCS	= excution.c
+EXEC_SRCS	= excution.c redirection.c
 
 INC_SRCS	=
 
