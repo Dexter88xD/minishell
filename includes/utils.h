@@ -6,7 +6,7 @@
 /*   By: sohamdan <sohamdan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 11:16:45 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/15 03:27:16 by sohamdan         ###   ########.fr       */
+/*   Updated: 2025/06/20 00:51:27 by sohamdan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void		ft_del_lst(t_token *node);
 int			ft_size_lst(t_token *lst);
 
 /***************EXPANDER UTILS***************/
+
+int			ft_isvalid(int c);
 
 int			ft_var_name_length(char *token);
 int			ft_should_expand(t_token *token);

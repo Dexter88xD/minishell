@@ -6,12 +6,19 @@
 /*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 03:10:14 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/19 16:28:58 by kakbour          ###   ########.fr       */
+/*   Updated: 2025/06/20 10:33:22 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "utils.h"
+
+int	ft_isvalid(int c)
+{
+	if (ft_isalnum(c) || c == '_')
+		return (1);
+	return (0);
+}
 
 void	ft_find_env_match(t_token *token, t_index *index)
 {
@@ -23,7 +30,7 @@ void	ft_find_env_match(t_token *token, t_index *index)
 		{
 			index->match++;
 			if (token->env[index->env][index->match] == '='
-				&& !ft_isalnum(token->value[index->val + index->match + 1]))
+				&& !ft_isvalid(token->value[index->val + index->match + 1]))
 			{
 				index->found_match = 1;
 				break ;
@@ -44,7 +51,7 @@ int	ft_var_name_length(char *token)
 	int	index;
 
 	index = 0;
-	while (token[index] && ft_isalnum(token[index]))
+	while (token[index] && ft_isvalid(token[index]))
 		index++;
 	return (index);
 }

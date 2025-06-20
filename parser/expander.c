@@ -6,7 +6,7 @@
 /*   By: kakbour <kakbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:07:42 by sohamdan          #+#    #+#             */
-/*   Updated: 2025/06/20 10:18:49 by kakbour          ###   ########.fr       */
+/*   Updated: 2025/06/20 12:10:46 by kakbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ int		ft_find_dollar(t_token *token)
 	int	i;
 	
 	i = 0;
-	while(token->value[i] && token->value[i] != '$')
+	while(token->value[i])
+	{
+		if (token->value[i] == '$' && ft_isvalid(token->value[i + 1]))
+			break;
 		i++;
+	}
 	return (i);
 }
 void	ft_expand_with_match(t_token *token, t_index *index)
@@ -80,7 +84,7 @@ void	ft_expand_token_string(t_token *token)
 	{
 		index->env = 0;
 		index->found_match = 0;
-		if (token->value[index->val] == '$')
+		if (token->value[index->val] == '$' && ft_isvalid(token->value[index->val + 1]))
 		{
 			ft_find_env_match(token, index);
 			ft_expand_token_value(token, index);
